@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="None">
+  
+  <link rel="shortcut icon" href="./img/favicon.ico">
+  <title>tweaked.info - tweaked.info</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="./css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="./css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "tweaked.info";
+    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_url = "/";
+  </script>
+  
+  <script src="./js/jquery-2.1.1.min.js"></script>
+  <script src="./js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="./js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="." class="icon icon-home"> tweaked.info</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href=".">tweaked.info</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#tweakedinfo">tweaked.info</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#history-of-the-project">History of the Project</a></li>
+        
+            <li><a class="toctree-l3" href="#modelling">Modelling</a></li>
+        
+            <li><a class="toctree-l3" href="#tooling">Tooling</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href=".">tweaked.info</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>tweaked.info</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="tweakedinfo">tweaked.info</h1>
+<p>tweaked.info is a <em>Course Definition Format</em> and ecosystem of tools. </p>
+<h2 id="history-of-the-project">History of the Project</h2>
+<p>tweaked.info started life as the data format for an experimental cloud-based LMS called <a href="https://github.com/impressory/impressory">Impressory</a>, that was shortlisted in The Australian Innovation Challenge a few years ago. Impressory bridges in-class and out-of-class interaction, and took advantage of there being a great wealth of social sites to draw in content from. In-class, it lets students chat up onto the main lecture screen, answering each others' questions as a side-channel to the lecture content. Out-of-class, it resembles a social news stream, with the same side chat-channel so the conversation could continue.</p>
+<p>The same format was then used for a system for smart and social assessment, <a href="https://github.com/impressory/atemporary">Assessory</a>. This started out supporting critique processes for studio courses, so that students can present and respond to each others' work while the work is still in progress.</p>
+<p>However, as the same format had proved useful for two quite different ed-tech systems, it became apparent that it'd be useful to extract the course definition format. That way, courses could be placed under version control and tracked and developed in a more coherent manner, rather than the current situation in most universities (where course definitions are fragmented across the unit catalogue, internal committee documents and approval systems, the LMS, and probably several assessment systems). </p>
+<p>It also drew somewhat from noticing that when edX was first built (in a hurry), they used an XML definition language, and when it was re-engineered, some of the original teams didn't want to move away from it. OpenEdX does now have an (XML) definition language, but apart from XML being a little unwieldy these days, it's also too closely tied to a single LMS.</p>
+<p>Some additional possibilities were presented at StartupWeekend Edu in Sydney in 2014, but for the moment we'll start with course modelling, course self-publishing, and simple tools for course-planning. </p>
+<h2 id="modelling">Modelling</h2>
+<p>This is a bit on how the models were developed. As the code is ported across into repositories under "tweakedinfo", it'll change to show the projects...</p>
+<h3 id="scala-case-classes">Scala case classes</h3>
+<p>The fundamental domain items (courses, content items, pre-requisite structures, etc) were first modelled as Scala case classes. This isn't intended to be the end-user format, but gives a concise, clear, and type-checkable central definition that also translates easily into other formats and can be used across the JVM (via Scala) and JavaScript (via Scala.js)</p>
+<p>This also allows automated tests to be written, for example to ensure that course plans are possible given the pre-requsite structures and offerings of the subjects within them.</p>
+<h3 id="bson-and-json-formats">BSON and JSON formats</h3>
+<p>These evolved naturally -- BSON as the storage format in MongoDB, and JSON as the wire format for messaging between the server and client in Impressory and Assessory. This means we already have a number of serialisers and deserialisers for for both JavaScript and JVM languages for the case classes in question. </p>
+<p>The intended user format is <a href="https://hjson.org/">HJSON</a>, as it is a little more friendly than strict JSON, allows comments and other aspects that would be useful to allow users to keep in the definition files, and has serialisation libraries for most platforms.</p>
+<p>It is also possible to construct courses directly from code (eg, in Groovy or Scala), which gives a very compact and useful format (often one I use for personal purposes). That's not intended to be the eventual storage format, however, as even though the format can be made friendly and readable, it would still allow inclusion of arbitrary code in course definition files, which could create security headaches down the track.</p>
+<h3 id="pre-requisite-dsl">Pre-requisite DSL</h3>
+<p>Pre-requisites have previously been constructed as structures from the code format. Though that's quite compact and readable when writing a course in code (eg, <code>FOO100 and FOO101 and cp(12)</code>), it becomes more awkward to write in HJSON which does not natively support DSLs. Accordingly, there are going to be two ways to do this:</p>
+<ul>
+<li>As structures, laid down in HJSON </li>
+<li>As an expression parsed from a string</li>
+</ul>
+<p>Additionally, in modern universities there are two kinds of pre-requisites</p>
+<ul>
+<li>Those which assume you have been studying at the same institution (eg, credit point requirements and requirements on particular units), and </li>
+<li>those which only assume prior knowledge (eg, pre-requisites for first year units where your previous study is likely to have been at school, another university, or in employment)</li>
+</ul>
+<p>While at StartupWeekend Edu, we talked about pre-requisites as a bipartate graph between topics and courses that require or supply them, tweaked.info is going to support both.</p>
+<h2 id="tooling">Tooling</h2>
+<p>Though the format has been around for a while (Impressory is more than five years old now), I've built prototypes of a number of tools using the course format, including:</p>
+<ul>
+<li>Course preview sites</li>
+<li>Course accreditation mappings (AQF and ACS CBOK)</li>
+<li>Automated testing of recommended course plans against pre-requisites and offerings</li>
+<li>Interactive course planners for students</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="./js/theme.js"></script>
+      <script src="./search/require.js"></script>
+      <script src="./search/search.js"></script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 0.17.2
+Build Date UTC : 2017-12-17 23:35:31
+-->
