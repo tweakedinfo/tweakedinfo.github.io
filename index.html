@@ -115,7 +115,7 @@
 <p>This also allows automated tests to be written, for example to ensure that course plans are possible given the pre-requsite structures and offerings of the subjects within them.</p>
 <h3 id="bson-and-json-formats">BSON and JSON formats</h3>
 <p>These evolved naturally -- BSON as the storage format in MongoDB, and JSON as the wire format for messaging between the server and client in Impressory and Assessory. This means we already have a number of serialisers and deserialisers for for both JavaScript and JVM languages for the case classes in question. </p>
-<p>The intended user format is <a href="https://hjson.org/">HJSON</a>, as it is a little more friendly than strict JSON, allows comments and other aspects that would be useful to allow users to keep in the definition files, and has serialisation libraries for most platforms.</p>
+<p>The intended definition format is <a href="https://hjson.org/">HJSON</a>, as it is a little more friendly than strict JSON, allows comments and other aspects that would be useful to allow users to keep in the definition files, and has serialisation libraries for most platforms. This lets us write a system where as well as interacting via the tooling, it is perfectly viable and supported to edit the definition files directly using any text editor (even for non-programmers such as learning designers or administrators involved in the course planning process).</p>
 <p>It is also possible to construct courses directly from code (eg, in Groovy or Scala), which gives a very compact and useful format (often one I use for personal purposes). That's not intended to be the eventual storage format, however, as even though the format can be made friendly and readable, it would still allow inclusion of arbitrary code in course definition files, which could create security headaches down the track.</p>
 <h3 id="pre-requisite-dsl">Pre-requisite DSL</h3>
 <p>Pre-requisites have previously been constructed as structures from the code format. Though that's quite compact and readable when writing a course in code (eg, <code>FOO100 and FOO101 and cp(12)</code>), it becomes more awkward to write in HJSON which does not natively support DSLs. Accordingly, there are going to be two ways to do this:</p>
@@ -177,5 +177,5 @@
 
 <!--
 MkDocs version : 0.17.2
-Build Date UTC : 2017-12-17 23:35:31
+Build Date UTC : 2017-12-17 23:49:44
 -->
